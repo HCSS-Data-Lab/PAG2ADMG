@@ -18,6 +18,7 @@ library(roxygen2)
 devtools::create("PAG2ADMG")
 
 ## How to load
+devtools::install_github("HCSS-Data-Lab/PAG2ADMG")
 
 # Source
 https://tinyheero.github.io/jekyll/update/2015/07/26/making-your-first-R-package.html
