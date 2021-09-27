@@ -8,6 +8,7 @@ There are two files in the 'Code' folder. One titled 'full_admg_learning.R' whic
 There is one file in the 'Documents' folder. It is titled 'pag2admg-important-theorems.pdf' and is a pdf stating all five theorems from the extended abstract and giving proofs for each of them. This document provides the proof of correctness for the pag2admg method.
 
 # Packaging
+## Creation
 install.packages("devtools")
 install.packages("roxygen2")
 
@@ -15,3 +16,8 @@ library(devtools)
 library(roxygen2)
 
 devtools::create("PAG2ADMG")
+
+## How to load
+
+# Source
+https://tinyheero.github.io/jekyll/update/2015/07/26/making-your-first-R-package.html
