@@ -3,6 +3,7 @@ library(ggm)
 
 #   Function that makes a random pag given a specific number of nodes, latent variable indices
 #   probability of edge between any pair of nodes and an alpha value for the independence test
+#' @export
 make_rdm_pag <- function(num_nodes, latent_idx, prob, alpha){
     g <- randomDAG(n = num_nodes, prob = prob)
     true.corr <- cov2cor(trueCov(g))
@@ -13,6 +14,7 @@ make_rdm_pag <- function(num_nodes, latent_idx, prob, alpha){
 }
 
 #   Function that takes an adjacency matrix of a dag and latent indices and returns a pag
+#' @export
 make_pag <- function(dag_amat, latent_idx){
     dag <- new('graphAM', adjMat = dag_amat, edgemode = 'directed')
     dag <- as(dag, 'graphNEL')
@@ -25,6 +27,7 @@ make_pag <- function(dag_amat, latent_idx){
 
 #   Function that takes in a pag and enumerates all possible ADMGs on those nodes based on the
 #   intelligent enumeration method provided in eval_possibilities_ggm
+#' @export
 pag2admg_verbose <- function(pag){
     pag_amat <- pag@amat
     admg_list <- list()
@@ -51,6 +54,7 @@ pag2admg_verbose <- function(pag){
 
 #   Function that takes in a pag and enumerates all possible ADMGs on those nodes based on the
 #   brute force enumeration method provided in eval_possibilities_ggm_brute
+#' @export
 pag2admg_verbose_brute <- function(pag){
     pag_amat <- pag@amat
     admg_list <- list()
@@ -78,6 +82,7 @@ pag2admg_verbose_brute <- function(pag){
 
 #   Function that takes an admg adjacency matrix and converts it into a DAG with latent variable confounders
 #   in every location that has a bi-directed edge, then converts it to a PAG and returns that PAG
+#' @export
 admg2dag2pag <- function(admg_amat){
     num_nodes <- ncol(admg_amat)
     for (i in 1:num_nodes){
@@ -120,6 +125,7 @@ admg2dag2pag <- function(admg_amat){
 
 #   Function that takes a list of possible edges, number of nodes, and the pag amat
 #   Returns a valid admg if one exists based on that information
+#' @export
 build_valid_admg_amat <- function(edge_info, num_nodes, pag_amat){
     amat <- matrix(rep(0,num_nodes^2), nrow = num_nodes, ncol = num_nodes)
     rownames(amat) <- rownames(pag_amat)
@@ -143,6 +149,7 @@ build_valid_admg_amat <- function(edge_info, num_nodes, pag_amat){
 }
 
 #   Function that enumerates the nodes based on the pcalg definition of edges (Not used)
+#' @export
 eval_possibilities_pcalg <- function(amat, node_names){
     node_one <- node_names[1]
     node_two <- node_names[2]
@@ -181,6 +188,7 @@ eval_possibilities_pcalg <- function(amat, node_names){
 
 #   Function that enumerates the nodes based on the ggm definition of edges and does this in the
 #   intelligent manner provided in the report
+#' @export
 eval_possibilities_ggm <- function(amat, node_names){
     node_one <- node_names[1]
     node_two <- node_names[2]
@@ -220,6 +228,7 @@ eval_possibilities_ggm <- function(amat, node_names){
 
 #   Function that enumerates the nodes based on the ggm definition of edges and does this in the
 #   brute force manner
+#' @export
 eval_possibilities_ggm_brute <- function(amat, node_names){
     node_one <- node_names[1]
     node_two <- node_names[2]
@@ -259,6 +268,7 @@ eval_possibilities_ggm_brute <- function(amat, node_names){
 
 #   Function that takes in a pag and returns the admg list that describes this using the brute
 #   force heuristic
+#' @export
 brute_force_function <- function(pag){
     admg_list <- pag2admg_verbose_brute(pag)
     parsed_admg_list <- list()
@@ -289,6 +299,7 @@ pag2admg <- function(pag){
 }
 
 #   Function that allows enumeration of all edge types based on a pag and a list of admgs
+#' @export
 enumerate_all_resulting_edges <- function(pag_amat, admg_amat_list){
     enumeration_amat <- matrix(nrow = nrow(pag_amat), ncol = ncol(pag_amat))
     for(i in 1:nrow(pag_amat)){
@@ -307,6 +318,7 @@ enumerate_all_resulting_edges <- function(pag_amat, admg_amat_list){
 }
 
 #   Function that plots all admgs in the external plot window
+#' @export
 plot_all_admgs <- function(admg_list){
     for(i in 1:length(admg_list)){
         plotGraph(admg_list[[i]], layout = layout.circle)
@@ -314,6 +326,7 @@ plot_all_admgs <- function(admg_list){
 }
 
 #   Function that plots all admgs in R using pcalgs definition
+#' @export
 plot_all_admgs_pcalg <- function(admg_list){
     for(i in 1:length(admg_list)){
         plot(convert_admg_ggm_to_pcalg_to_plot(admg_list[[i]]))
@@ -321,6 +334,7 @@ plot_all_admgs_pcalg <- function(admg_list){
 }
 
 #   Takes a pag adjacency matrix and creates a pag object
+#' @export
 make_pag_from_amat <- function(pag_amat){
     rownames(pag_amat) <- colnames(pag_amat) <- 1:nrow(pag_amat)
     pag <- new('fciAlgo', amat = pag_amat)
@@ -329,6 +343,7 @@ make_pag_from_amat <- function(pag_amat){
 }
 
 #   Converts an admg_ggm_amat into an amat graphable in pcalg in R
+#' @export
 convert_admg_ggm_to_pcalg_to_plot <- function(admg_ggm_amat){
     temp <- admg_ggm_amat + 10
     for(i in 1:nrow(temp)){
@@ -345,6 +360,7 @@ convert_admg_ggm_to_pcalg_to_plot <- function(admg_ggm_amat){
 }
 
 #   Checks if the input adj matrix refers to a valid ADMG
+#' @export
 isADMG <- function(amat){
     ### check is if a graph is an ADMG
     comp <- unmakeMG(amat)

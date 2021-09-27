@@ -1,0 +1,19 @@
+Package: PAG2ADMG
+Title: PAG2ADMG
+Version: 0.0.1.0000
+Authors@R: 
+    person(given = "James",
+           family = "Levell",
+           role = c("Developer", "DevOps"),
+           email = "jameslevell@hhcss.nl",
+           comment = c(Skills = "TryingHard"))
+Description: PAG2ADMG
+License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
+    license
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.2
+Imports:
+	pcalg
+    ggm

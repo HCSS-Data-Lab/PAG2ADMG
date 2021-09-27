@@ -1,0 +1,12 @@
+version: '3.9'
+services:      
+  hcss-pag2admg:
+    build: 
+      target: hcss-pag2admg-dev
+      dockerfile: Dockerfile
+    restart: always
+    volumes:
+      # Mount the root folder that contains .git
+      - .:/workspace:cached
+      # mount code
+      - ./:/srv/app
