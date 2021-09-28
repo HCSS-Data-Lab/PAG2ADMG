@@ -4,7 +4,7 @@ Version: 0.0.1.0000
 Authors@R: 
     person(given = "James",
            family = "Levell",
-           role = c("Developer", "DevOps"),
+           role = c("cre", "ctb"),
            email = "jameslevell@hhcss.nl",
            comment = c(Skills = "TryingHard"))
 Description: PAG2ADMG
